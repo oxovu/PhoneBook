@@ -1,36 +1,66 @@
 package MyClass;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
-import java.util.ArrayList;
+class PhoneBook {
 
-public class PhoneBook {
+    private Map<Name, PhoneNumber> book = new HashMap<>();
 
-    private ArrayList<Contact> record;
 
-    public PhoneBook() {
-        record = new ArrayList<Contact>();
-    }
-    public void addRecord(Contact contact) {
-        record.add(contact);
-    }
-
-    public void removeRecord(Contact contact) {
-        record.remove(contact);
+    void put(Name name, PhoneNumber number){
+        book.put(name, number);
     }
 
-    public String findPhoneNumber(String name) {
-        for (int i = 0; i < record.size(); i++)
-        {
-            if (name.equals(record.get(i).getFullName())) return record.get(i).getPhoneNumber();
+
+    private Name toName(String n) {
+        return new Name(n);
+    }
+
+    private PhoneNumber toPhoneNumber(String n) {
+        return new PhoneNumber(n);
+    }
+
+    void addContact(String name, String numbers) {
+        String[] number = numbers.split(", ");
+        for (String n : number) {
+            book.put(toName(name), toPhoneNumber(n));
         }
-        return "not found";
     }
 
-    public String findName(String phonenumber) {
-        for (int i = 0; i < record.size(); i++)
-        {
-            if (record.get(i).getPhoneNumber().contains(phonenumber)) return record.get(i).getFullName();
+    public void removeContact(String name) {
+        book.remove(toName(name));
+    }
+
+    public void addNumber(String name, String number) {
+        book.put(toName(name), toPhoneNumber(number));
+    }
+
+    public void removeNumber(String name, String number) {
+        book.remove(toName(name), toPhoneNumber(number));
+    }
+
+    String findNumber(String name) {
+        return book.get(toName(name)).toString();
+    }
+
+    public String findName(String number) {
+        for (Map.Entry<Name, PhoneNumber> entry : book.entrySet()) {
+            if (entry.getValue().toString().equals(number)) return entry.getKey().toString();
         }
-        return "not found";
+        return "не найдено";
+    }
+
+    @Override
+    public int hashCode() {
+        return book.hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return book.toString();
     }
 }
+
+
