@@ -1,36 +1,25 @@
 package MyClass;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 class PhoneBook {
 
-    private Map<Name, PhoneNumber> book = new HashMap<>();
+    private Map<Name, List<PhoneNumber>> book = new HashMap<>();
 
-
-    void put(Name name, PhoneNumber number){
-        book.put(name, number);
+    void addContact(Name name, List<PhoneNumber> numbers) {
+        book.put(name, numbers);
     }
 
-
-    private Name toName(String n) {
-        return new Name(n);
+    void removeContact(Name name) {
+        book.remove(name);
     }
 
-    private PhoneNumber toPhoneNumber(String n) {
-        return new PhoneNumber(n);
+    boolean contains(Name name, List<PhoneNumber> numbers) {
+        return book.containsKey(name) && book.containsValue(numbers);
     }
 
-    void addContact(String name, String numbers) {
-        String[] number = numbers.split(", ");
-        for (String n : number) {
-            book.put(toName(name), toPhoneNumber(n));
-        }
-    }
-
-    public void removeContact(String name) {
-        book.remove(toName(name));
+    /*String findNumbers(Name name) {  // еще не отредактированные методы
+        return book.get(name).toString();
     }
 
     public void addNumber(String name, String number) {
@@ -39,10 +28,6 @@ class PhoneBook {
 
     public void removeNumber(String name, String number) {
         book.remove(toName(name), toPhoneNumber(number));
-    }
-
-    String findNumber(String name) {
-        return book.get(toName(name)).toString();
     }
 
     public String findName(String number) {
@@ -60,7 +45,7 @@ class PhoneBook {
     @Override
     public String toString() {
         return book.toString();
-    }
+    } */
 }
 
 

@@ -16,8 +16,18 @@ class PhoneNumber {
     }
 
     @Override
+    public String toString() { //не конечный вариант вывода номеров
+        return this.number;
+    }
+
+    @Override
     public int hashCode() {
         return number.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return this == object;
     }
 }
 

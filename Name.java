@@ -17,7 +17,17 @@ class Name {
     }
 
     @Override
+    public String toString() {
+        return this.name;
+    }
+
+    @Override
     public int hashCode() {
         return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        return this == object;
     }
 }
