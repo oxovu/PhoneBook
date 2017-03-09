@@ -18,7 +18,7 @@ class PhoneNumber {
     @Override
     public String toString() { //не конечный вариант вывода номеров
         return this.number;
-    }
+    } // не конечный вариант вывода номеров
 
     @Override
     public int hashCode() {

@@ -18,34 +18,38 @@ class PhoneBook {
         return book.containsKey(name) && book.containsValue(numbers);
     }
 
-    /*String findNumbers(Name name) {  // еще не отредактированные методы
-        return book.get(name).toString();
+    void addNumber(Name name, PhoneNumber number) {
+        List<PhoneNumber> newNumbers = new ArrayList<PhoneNumber>() {
+            {
+                for (PhoneNumber n : book.get(name)) add(n);
+                add(number);
+            }
+        };
+        book.remove(name);
+        book.put(name, newNumbers);
     }
 
-    public void addNumber(String name, String number) {
-        book.put(toName(name), toPhoneNumber(number));
+    void removeNumber(Name name, PhoneNumber number) {
+        List<PhoneNumber> newNumbers = new ArrayList<PhoneNumber>() {
+            {
+                for (PhoneNumber n : book.get(name)) if (!n.equals(number)) add(n);
+            }
+        };
+        book.remove(name);
+        book.put(name, newNumbers);
     }
 
-    public void removeNumber(String name, String number) {
-        book.remove(toName(name), toPhoneNumber(number));
+
+    List<PhoneNumber> findNumbers(Name name) {
+        return book.get(name);
     }
 
-    public String findName(String number) {
-        for (Map.Entry<Name, PhoneNumber> entry : book.entrySet()) {
-            if (entry.getValue().toString().equals(number)) return entry.getKey().toString();
+    Name findName(PhoneNumber number) {
+        for (Map.Entry<Name, List<PhoneNumber>> entry : book.entrySet()) {
+            if (entry.getValue().contains(number)) return entry.getKey();
         }
-        return "не найдено";
+        return null;
     }
-
-    @Override
-    public int hashCode() {
-        return book.hashCode();
-    }
-
-    @Override
-    public String toString() {
-        return book.toString();
-    } */
 }
 
 
