@@ -3,10 +3,10 @@ package MyClass;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class PhoneNumber {
+public  final class PhoneNumber {
     private String number;
 
-    PhoneNumber(String number) {
+    public PhoneNumber(String number) {
         String pattern1 = "\\+*\\**[\\d\\-]+\\#*";
         Pattern p1 = Pattern.compile(pattern1);
         Matcher m1 = p1.matcher(number);
@@ -16,9 +16,7 @@ class PhoneNumber {
     }
 
     @Override
-    public String toString() { //не конечный вариант вывода номеров
-        return this.number;
-    } // не конечный вариант вывода номеров
+    public String toString() { return this.number; }
 
     @Override
     public int hashCode() {
@@ -27,7 +25,8 @@ class PhoneNumber {
 
     @Override
     public boolean equals(Object object) {
-        return this == object;
+        if (this.toString() == object.toString()) return true;
+        return  false;
     }
 }
 

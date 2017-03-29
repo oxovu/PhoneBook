@@ -4,10 +4,10 @@ package MyClass;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Name {
+public final class Name {
     private String name;
 
-    Name(String name) {
+    public Name(String name) {
         String pattern1 = "[a-z|A-Z|а-я|А-Я]+\\s*[a-z|A-Z|а-я|А-Я]*\\s*[a-z|A-Z|а-я|А-Я]*";
         Pattern p1 = Pattern.compile(pattern1);
         Matcher m1 = p1.matcher(name);
@@ -28,6 +28,7 @@ class Name {
 
     @Override
     public boolean equals(Object object) {
-        return this == object;
+        if (this.toString() == object.toString()) return true;
+        return  false;
     }
 }

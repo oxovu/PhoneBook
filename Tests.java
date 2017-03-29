@@ -20,16 +20,21 @@ public class Tests {
     PhoneNumber number8 = new PhoneNumber("+7-944-576-86-66");
     PhoneNumber number9 = new PhoneNumber("89277882265");
     PhoneNumber number10 = new PhoneNumber("+7-884-576-86-66");
+    PhoneNumber number11 = new PhoneNumber("+7-884-576-89-66");
     Name name1 = new Name("Ира Колесникова");
     Name name2 = new Name("Олеся");
     Name name3 = new Name("Ian");
     Name name4 = new Name("Настя");
+    Name name5 = new Name("Ира Колесникова");
     List<PhoneNumber> numbers1 = Arrays.asList(number1, number2, number3);
     List<PhoneNumber> numbers2 = Arrays.asList(number4);
     List<PhoneNumber> numbers3 = Arrays.asList(number5, number6);
     List<PhoneNumber> numbers4 = Arrays.asList(number7, number8);
     List<PhoneNumber> numbers1add = Arrays.asList(number1, number2, number3, number9);
     List<PhoneNumber> numbers2add = Arrays.asList(number4, number10);
+    List<PhoneNumber> numbers3add = Arrays.asList(number1, number2, number3, number10);
+    List<Name> names1 = Arrays.asList(name1);
+    List<Name> names2 = Arrays.asList();
 
     @Before
     public void setup() {
@@ -57,19 +62,20 @@ public class Tests {
         book.addNumber(name2, number10);
         assertEquals(true, book.contains(name2, numbers2add));
         book.removeNumber(name1, number9);
-        assertEquals(true, book.contains(name2, numbers1));
+        assertEquals(true, book.contains(name1, numbers1));
+        book.addNumber(name1, number10);
+        assertEquals(true, book.contains(name1, numbers3add));
     }
 
     @Test
     public void findNumbers() {
-        assertEquals(numbers1, book.findNumbers(name1));
+        assertEquals(numbers1, book.findNumbers(name5));
 
     }
 
     @Test
     public void findName() {
-        assertEquals(name1, book.findName(number2));
-
+        assertEquals(names1, book.findName(number2));
+        assertEquals(names2, book.findName(number11));
     }
-
 }

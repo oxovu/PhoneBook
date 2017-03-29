@@ -2,53 +2,52 @@ package MyClass;
 
 import java.util.*;
 
-class PhoneBook {
+public final class PhoneBook {
 
     private Map<Name, List<PhoneNumber>> book = new HashMap<>();
 
-    void addContact(Name name, List<PhoneNumber> numbers) {
+    public void addContact(Name name, List<PhoneNumber> numbers) {
+        if (!book.containsKey(name)) {
+            if (!numbers.equals(null)) book.put(name, numbers);
+        } else {
+            for (PhoneNumber number:numbers) addNumber(name, number);
+        }
+    }
+
+    public void removeContact(Name name) {
+        book.remove(name);
+    }
+
+    public boolean contains(Name name, List<PhoneNumber> numbers) {
+        return book.containsKey(name) && book.get(name).equals(numbers);
+    }
+
+    public void addNumber(Name name, PhoneNumber number) {
+        List<PhoneNumber> numbers = new ArrayList(book.get(name));
+        if (!numbers.contains(number)) numbers.add(number);
         book.put(name, numbers);
     }
 
-    void removeContact(Name name) {
-        book.remove(name);
-    }
-
-    boolean contains(Name name, List<PhoneNumber> numbers) {
-        return book.containsKey(name) && book.containsValue(numbers);
-    }
-
-    void addNumber(Name name, PhoneNumber number) {
-        List<PhoneNumber> newNumbers = new ArrayList<PhoneNumber>() {
-            {
-                for (PhoneNumber n : book.get(name)) add(n);
-                add(number);
-            }
-        };
-        book.remove(name);
-        book.put(name, newNumbers);
-    }
-
-    void removeNumber(Name name, PhoneNumber number) {
-        List<PhoneNumber> newNumbers = new ArrayList<PhoneNumber>() {
-            {
-                for (PhoneNumber n : book.get(name)) if (!n.equals(number)) add(n);
-            }
-        };
-        book.remove(name);
-        book.put(name, newNumbers);
-    }
-
-
-    List<PhoneNumber> findNumbers(Name name) {
-        return book.get(name);
-    }
-
-    Name findName(PhoneNumber number) {
-        for (Map.Entry<Name, List<PhoneNumber>> entry : book.entrySet()) {
-            if (entry.getValue().contains(number)) return entry.getKey();
+    public void removeNumber(Name name, PhoneNumber number) {
+        List<PhoneNumber> numbers = book.get(name);
+        for (Iterator iter = numbers.iterator(); iter.hasNext(); ) {
+            if (number.equals(iter.next())) iter.remove();
         }
-        return null;
+    }
+
+
+    public List<PhoneNumber> findNumbers(Name name) {
+        List<PhoneNumber> numbers = new ArrayList();
+        numbers.addAll(book.get(name));
+        return numbers;
+    }
+
+    public List<Name> findName(PhoneNumber number) {
+        List<Name> names = new ArrayList<Name>();
+        for (Map.Entry<Name, List<PhoneNumber>> entry : book.entrySet()) {
+            if (entry.getValue().contains(number)) names.add(entry.getKey());
+        }
+        return names;
     }
 }
 
