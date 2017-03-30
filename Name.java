@@ -28,7 +28,10 @@ public final class Name {
 
     @Override
     public boolean equals(Object object) {
-        if (this.toString() == object.toString()) return true;
-        return  false;
+        if (object == this) return true;
+        if (object instanceof Name) {
+            final Name other = (Name) object;
+            return name.equals(other.name);
+        } else return false;
     }
 }

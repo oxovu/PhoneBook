@@ -25,8 +25,11 @@ public  final class PhoneNumber {
 
     @Override
     public boolean equals(Object object) {
-        if (this.toString() == object.toString()) return true;
-        return  false;
+        if (object == this) return true;
+        if (object instanceof PhoneNumber) {
+            final PhoneNumber other = (PhoneNumber) object;
+            return number.equals(other.number);
+        } else return false;
     }
 }
 
