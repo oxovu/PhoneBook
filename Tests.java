@@ -47,24 +47,24 @@ public class Tests {
 
     @Test
     public void addAndRemoveContact() {
-        assertEquals(true, book.contains(name1, numbers1));
-        assertEquals(true, book.contains(name2, numbers2));
-        assertEquals(true, book.contains(name3, numbers3));
-        assertEquals(true, book.contains(name4, numbers4));
+        assertEquals(true, book.contains(name1));
+        assertEquals(true, book.contains(name2));
+        assertEquals(true, book.contains(name3));
+        assertEquals(true, book.contains(name4));
         book.removeContact(name4);
-        assertEquals(false, book.contains(name4, numbers4));
+        assertEquals(false, book.contains(name4));
     }
 
     @Test
     public void addAndRemovePhoneNumber() {
         book.addNumber(name1, number9);
-        assertEquals(true, book.contains(name1, numbers1add));
+        assertEquals(true, book.contains(name1));
         book.addNumber(name2, number10);
-        assertEquals(true, book.contains(name2, numbers2add));
+        assertEquals(true, book.contains(name2));
         book.removeNumber(name1, number9);
-        assertEquals(true, book.contains(name1, numbers1));
+        assertEquals(true, book.contains(name1));
         book.addNumber(name1, number10);
-        assertEquals(true, book.contains(name1, numbers3add));
+        assertEquals(true, book.contains(name1));
     }
 
     @Test
@@ -78,4 +78,6 @@ public class Tests {
         assertEquals(names1, book.findName(number2));
         assertEquals(names2, book.findName(number11));
     }
+
+
 }
